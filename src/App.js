@@ -1,22 +1,20 @@
 import styled from "styled-components";
 
-const Father = styled.div`
+const Wrapper = styled.div`
   display: flex;
 `;
 
-const Input = styled.input.attrs({ required: true, minLength: 10 })`
+const Box = styled.div`
+  height: 200px;
+  weight: 200px;
   background-color: tomato;
-`
+`;
 
 function App() {
   return (
-    <Father>
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-      <Input />
-    </Father>
+    <Wrapper>
+      <Box />
+    </Wrapper>
   )
 }
 
