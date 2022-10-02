@@ -2,6 +2,9 @@ import styled, { keyframes } from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.backgroundColor}
 `;
 
 const animation = keyframes`
@@ -38,11 +41,15 @@ const Box = styled.div`
   }
 `;
 
+const Text = styled.h1`
+  color: ${(props) => props.theme.textColor};
+`;
 
 function App() {
   return (
     <Wrapper>
       <Box>
+        <Text>Welcome</Text>
         <Emoji>😍</Emoji>
       </Box>
     </Wrapper>
