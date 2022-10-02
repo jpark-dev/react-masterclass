@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import Circle from "./Circle";
 
 const Wrapper = styled.div`
   display: flex;
@@ -52,6 +53,9 @@ function App() {
         <Text>Welcome</Text>
         <Emoji>😍</Emoji>
       </Box>
+      <div>
+        <Circle bgColor="teal"/>
+      </div>
     </Wrapper>
   )
 }
