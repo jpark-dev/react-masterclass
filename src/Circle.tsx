@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 interface CircleProps {
@@ -15,9 +16,14 @@ const Container = styled.div<CircleProps>`
 
 
 function Circle({ bgColor, borderColor, text="default text" }: CircleProps) {
-  return <Container bgColor={bgColor} borderColor={borderColor ?? bgColor}>
-    {text}
-  </Container>
+  const [counter, setCounter] = useState<number|string>(1);
+  setCounter('hello');
+  setCounter(1);
+  return (
+    <Container bgColor={bgColor} borderColor={borderColor ?? bgColor}>
+      {text}
+    </Container>
+  )
 };
 
 export default Circle;
