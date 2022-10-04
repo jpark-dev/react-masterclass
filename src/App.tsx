@@ -55,6 +55,7 @@ function App() {
       </Box>
       <div>
         <Circle bgColor="teal"/>
+        <Circle text="text exists" bgColor="blue" borderColor="red" />
       </div>
     </Wrapper>
   )
