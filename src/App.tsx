@@ -1,4 +1,20 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
+  height: 300px;
+  width: 500px;
+`;
+
+const H1 = styled.h1`
+  color: ${(props) => props.theme.textColor};
+`;
+
+const Btn = styled.button`
+  color: ${(props) => props.theme.btnColor};
+`;
 
 function App() {
   const [username, setUsername] = useState("");
@@ -14,12 +30,15 @@ function App() {
   };
 
   return (
-    <div>
+    <Wrapper>
+      <H1>
+        hwll
+      </H1>
       <form onSubmit={onSubmit}>
         <input value={username} onChange={onChange} type="text" placeholder="username" />
-        <button>Log in</button>
+        <Btn>Log in</Btn>
       </form>
-    </div>
+    </Wrapper>
   )
 }
 
