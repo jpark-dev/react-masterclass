@@ -18,9 +18,18 @@ const CoinsList = styled.ul``;
 const Coin = styled.li`
   background-color: white;
   color:${props => props.theme.bgColor};
-  padding: 20px;
   margin-bottom: 10px;
   border-radius: 20px;
+  a {
+    display: block;
+    transition: color 0.2s ease-in;
+    padding: 20px;
+  }
+  &:hover {
+    a {
+      color:${props => props.theme.accentColor};
+    }
+  }
 `;
 
 const Title = styled.h1`
