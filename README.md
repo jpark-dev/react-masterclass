@@ -10,6 +10,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
   - [x] `as` to render to a different html tag
   - [x] `attr` to set default css options
   - [x] `ThemeProvider` for dark/light modes (state management is not handled here)
+  
+- TypeScript
+  - [x] Definitely Typed
+  - [x] Prop Types & interface, 
+  - [x] Optional Props with `?`
+  - [x] React State with Typescript
+  - [x] Forms with Typescript
+  - [x] Extending themes
+
 
 ## Available Scripts
 
