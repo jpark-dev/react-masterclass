@@ -1,9 +1,17 @@
 import { useQuery } from "react-query";
 import { Helmet } from "react-helmet";
-import { useLocation, useParams, Outlet, useMatch } from "react-router";
+import {
+  useNavigate,
+  useLocation,
+  useParams,
+  Outlet,
+  useMatch,
+} from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
+import { IconButton } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 interface LocationState {
   state: {
@@ -158,6 +166,11 @@ function Coin() {
 
   const loading = infoLoading || tickerLoading;
 
+  const navigate = useNavigate();
+  const handleOnClick = () => {
+    navigate("/");
+  };
+
   return (
     <Container>
       <Helmet>
@@ -166,6 +179,14 @@ function Coin() {
         </title>
       </Helmet>
       <Header>
+        <IconButton
+          onClick={handleOnClick}
+          color="primary"
+          aria-label="go previous"
+          component="label"
+        >
+          <ArrowBackIcon />
+        </IconButton>
         <Title>
           {state?.coin ? state.coin : loading ? "Loading" : infoData?.name}
         </Title>
@@ -185,7 +206,9 @@ function Coin() {
             </OverviewItem>
             <OverviewItem>
               <span>Price:</span>
-              <span>{`$ ${tickerData?.quotes.USD.price.toFixed(2)}` || '-'}</span>
+              <span>
+                {`$ ${tickerData?.quotes.USD.price.toFixed(2)}` || "-"}
+              </span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
