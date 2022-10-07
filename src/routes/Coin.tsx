@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams, Outlet } from "react-router";
+import { useLocation, useParams, Outlet, useMatch } from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -142,6 +142,8 @@ function Coin() {
   const { state } = useLocation() as LocationState;
   const [info, setInfo] = useState<InfoData>();
   const [priceInfo, setPriceInfo] = useState<PriceData>();
+  const chartMatch = useMatch("/:coinID/chart");
+  const priceMatch = useMatch("/:coinID/price");
 
   useEffect(() => {
     (async () => {
@@ -192,12 +194,12 @@ function Coin() {
             </OverviewItem>
           </Overview>
           <Tabs>
-            <Tab isActive={true}>
+            <Tab isActive={chartMatch !== null}>
               <Link to={`/${coinID}/chart`}>
                 Chart
               </Link>
             </Tab>
-            <Tab isActive={false}>
+            <Tab isActive={priceMatch !== null}>
               <Link to={`/${coinID}/price`}>
                 Price
               </Link>
