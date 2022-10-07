@@ -1,4 +1,5 @@
 import { useQuery } from "react-query";
+import { Helmet } from "react-helmet";
 import { useLocation, useParams, Outlet, useMatch } from "react-router";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -145,7 +146,10 @@ function Coin() {
 
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ["info", coinID],
-    () => fetchCoinInfo(coinID)
+    () => fetchCoinInfo(coinID),
+    {
+      refetchInterval: 5000,
+    }
   );
   const { isLoading: tickerLoading, data: tickerData } = useQuery<PriceData>(
     ["ticker", coinID],
@@ -156,6 +160,11 @@ function Coin() {
 
   return (
     <Container>
+      <Helmet>
+        <title>
+          {state?.coin ? state.coin : loading ? "Loading" : infoData?.name}
+        </title>
+      </Helmet>
       <Header>
         <Title>
           {state?.coin ? state.coin : loading ? "Loading" : infoData?.name}
@@ -175,8 +184,8 @@ function Coin() {
               <span>${infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source:</span>
-              <span>{infoData?.open_source ? "Yes" : "No"}</span>
+              <span>Price:</span>
+              <span>{`$ ${tickerData?.quotes.USD.price.toFixed(2)}` || '-'}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
