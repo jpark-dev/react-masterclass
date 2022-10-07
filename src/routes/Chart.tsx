@@ -31,7 +31,7 @@ function Chart() {
       ) : (
         <ApexChart
           type="line"
-          series={[{ name: "price", data: data?.map((price) => parseFloat(price.close)) ?? []}]}
+          series={[{ name: "Price", data: data?.map((price) => parseFloat(price.close)) ?? []}]}
           options={{
             theme: {
               mode: "dark",
@@ -44,6 +44,14 @@ function Chart() {
                 show: false,
               }
             },
+            colors: ["#0fbcf9"],
+            fill: {
+              type: "gradient",
+              gradient: {
+                gradientToColors: ["#0be881"],
+                stops: [0, 100],
+              },
+            },
             grid: {
               show: false,
             },
@@ -51,7 +59,14 @@ function Chart() {
               curve: "smooth",
               width: 5,
             },
+            tooltip: {
+              y: {
+                formatter: (v) => `$ ${v.toFixed(2)}`
+              }
+            },
             xaxis: {
+              categories: data?.map(price => new Date(price.time_close * 1000).toUTCString()),
+              type: "datetime",
               labels: {
                 show: false,
               },
