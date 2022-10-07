@@ -61,7 +61,7 @@ interface PriceData {
       price: number;
       volume_24h: number;
       volume_24h_change_24h: number;
-    }
+    };
   };
 }
 
@@ -143,15 +143,23 @@ function Coin() {
   const chartMatch = useMatch("/:coinID/chart");
   const priceMatch = useMatch("/:coinID/price");
 
-  const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(["info", coinID], () => fetchCoinInfo(coinID));
-  const { isLoading: tickerLoading, data: tickerData } = useQuery<PriceData>(["ticker", coinID], () => fetchCoinTickers(coinID));
+  const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
+    ["info", coinID],
+    () => fetchCoinInfo(coinID)
+  );
+  const { isLoading: tickerLoading, data: tickerData } = useQuery<PriceData>(
+    ["ticker", coinID],
+    () => fetchCoinTickers(coinID)
+  );
 
   const loading = infoLoading || tickerLoading;
 
   return (
     <Container>
       <Header>
-        <Title>{state?.coin ? state.coin : loading ? "Loading" : infoData?.name}</Title>
+        <Title>
+          {state?.coin ? state.coin : loading ? "Loading" : infoData?.name}
+        </Title>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
@@ -184,17 +192,13 @@ function Coin() {
           </Overview>
           <Tabs>
             <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinID}/chart`}>
-                Chart
-              </Link>
+              <Link to={`/${coinID}/chart`}>Chart</Link>
             </Tab>
             <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinID}/price`}>
-                Price
-              </Link>
+              <Link to={`/${coinID}/price`}>Price</Link>
             </Tab>
           </Tabs>
-          <Outlet />
+          <Outlet context={{ coinID }} />
         </>
       )}
     </Container>
