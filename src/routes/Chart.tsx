@@ -23,6 +23,10 @@ function Chart() {
   const { isLoading, data } = useQuery<IData[]>(["ohlcv", coinID], () =>
     fetchCoinHistory(coinID)
   );
+  const mappedOhlcvData = data?.map((data: IData) => ({
+    x: new Date(data.time_open * 1000).toLocaleDateString(),
+    y: [data.open, data.high, data.low, data.close],
+  }));
 
   return (
     <h1>
@@ -30,55 +34,27 @@ function Chart() {
         "Loading..."
       ) : (
         <ApexChart
-          type="line"
-          series={[{ name: "Price", data: data?.map((price) => parseFloat(price.close)) ?? []}]}
+          type="candlestick"
+          series={[{ data: mappedOhlcvData }] as unknown as number[]}
           options={{
-            theme: {
-              mode: "dark",
-            },
             chart: {
-              background: "transparent",
               height: 300,
               width: 500,
               toolbar: {
                 show: false,
-              }
-            },
-            colors: ["#0fbcf9"],
-            fill: {
-              type: "gradient",
-              gradient: {
-                gradientToColors: ["#0be881"],
-                stops: [0, 100],
               },
             },
-            grid: {
-              show: false,
-            },
-            stroke: {
-              curve: "smooth",
-              width: 5,
-            },
-            tooltip: {
-              y: {
-                formatter: (v) => `$ ${v.toFixed(2)}`
-              }
+            theme: {
+              mode: "dark",
             },
             xaxis: {
-              categories: data?.map(price => new Date(price.time_close * 1000).toUTCString()),
               type: "datetime",
-              labels: {
-                show: false,
-              },
               axisBorder: {
                 show: false,
               },
               axisTicks: {
                 show: false,
               },
-            },
-            yaxis: {
-              show: false,
             },
           }}
         />
