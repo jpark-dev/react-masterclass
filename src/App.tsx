@@ -29,8 +29,9 @@ const GlobalStyle = createGlobalStyle`
     display: block;
   }
   body {
-    line-height: 1;
+    font-weight: 400;
     font-family: 'Lato', sans-serif;
+    line-height: 1.2;
     background-color:${(props) => props.theme.bgColor};
     color:${(props) => props.theme.textColor};
   }
