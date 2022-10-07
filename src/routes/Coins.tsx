@@ -24,7 +24,8 @@ const Coin = styled.li`
   margin-bottom: 10px;
   border-radius: 20px;
   a {
-    display: block;
+    display: flex;
+    align-items: center;
     transition: color 0.2s ease-in;
     padding: 20px;
   }
@@ -45,35 +46,11 @@ const Loader = styled.span`
   display: block;
 `;
 
-const coins = [
-  {
-    id: "btc-bitcoin",
-    name: "Bitcoin",
-    symbol: "BTC",
-    rank: 1,
-    is_new: false,
-    is_active: true,
-    type: "coin",
-  },
-  {
-    id: "eth-ethereum",
-    name: "Ethereum",
-    symbol: "ETH",
-    rank: 2,
-    is_new: false,
-    is_active: true,
-    type: "coin",
-  },
-  {
-    id: "hex-hex",
-    name: "HEX",
-    symbol: "HEX",
-    rank: 3,
-    is_new: false,
-    is_active: true,
-    type: "token",
-  },
-]
+const Img = styled.img`
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+`;
 
 interface CoinInterface {
   id: string,
@@ -108,7 +85,10 @@ function Coins() {
         <CoinsList>
           {coins.map(coin =>
             <Coin key={coin.id}>
-              <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link>
+              <Link to={`/${coin.id}`}>
+                <Img src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} alt={coin.id}/>
+                {coin.name} &rarr;
+              </Link>
             </Coin>
           )}
         </CoinsList>
