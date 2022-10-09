@@ -18,6 +18,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
   - [x] React State with Typescript
   - [x] Forms with Typescript
   - [x] Extending themes
+- React-router
+  - [x] useLocation
+  - [x] Outlet
+  - [x] useParams
+  - [x] useMatch
+- Recoil for state management
+- React-Helmet
+- React-Query
+- ApexChart
 
 ## Available Scripts
 
