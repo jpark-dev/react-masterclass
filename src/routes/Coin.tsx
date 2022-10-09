@@ -146,7 +146,11 @@ const Tab = styled.span<{ isActive: boolean }>`
   }
 `;
 
-function Coin() {
+interface CoinProps {
+  isDark: boolean;
+}
+
+function Coin({isDark}:CoinProps) {
   const { coinID } = useParams<RouteParams>();
   const { state } = useLocation() as LocationState;
   const chartMatch = useMatch("/:coinID/chart");
