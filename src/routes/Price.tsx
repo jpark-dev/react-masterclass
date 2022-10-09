@@ -60,48 +60,57 @@ function Price() {
 
   return (
     <Container>
-      <PriceItem>market_cap: {tickerData?.quotes.USD.market_cap}</PriceItem>
-      <PriceItem>ath_date: {tickerData?.quotes.USD.ath_date}</PriceItem>
-      <PriceItem>ath_price: {tickerData?.quotes.USD.ath_price}</PriceItem>
-      <PriceItem>market_cap: {tickerData?.quotes.USD.market_cap}</PriceItem>
-      <PriceItem>
-        market_cap_change_24h: {tickerData?.quotes.USD.market_cap_change_24h}
-      </PriceItem>
-      <PriceItem>
-        percent_change_1h: {tickerData?.quotes.USD.percent_change_1h}
-      </PriceItem>
-      <PriceItem>
-        percent_change_1y: {tickerData?.quotes.USD.percent_change_1y}
-      </PriceItem>
-      <PriceItem>
-        percent_change_6h: {tickerData?.quotes.USD.percent_change_6h}
-      </PriceItem>
-      <PriceItem>
-        percent_change_7d: {tickerData?.quotes.USD.percent_change_7d}
-      </PriceItem>
-      <PriceItem>
-        percent_change_12h: {tickerData?.quotes.USD.percent_change_12h}
-      </PriceItem>
-      <PriceItem>
-        percent_change_15m: {tickerData?.quotes.USD.percent_change_15m}
-      </PriceItem>
-      <PriceItem>
-        percent_change_24h: {tickerData?.quotes.USD.percent_change_24h}
-      </PriceItem>
-      <PriceItem>
-        percent_change_30d: {tickerData?.quotes.USD.percent_change_30d}
-      </PriceItem>
-      <PriceItem>
-        percent_change_30m: {tickerData?.quotes.USD.percent_change_30m}
-      </PriceItem>
-      <PriceItem>
-        percent_from_price_ath: {tickerData?.quotes.USD.percent_from_price_ath}
-      </PriceItem>
-      <PriceItem>price: {tickerData?.quotes.USD.price}</PriceItem>
-      <PriceItem>volume_24h: {tickerData?.quotes.USD.volume_24h}</PriceItem>
-      <PriceItem>
-        volume_24h_change_24h: {tickerData?.quotes.USD.volume_24h_change_24h}
-      </PriceItem>
+      {tickerLoading ? (
+        "Loading..."
+      ) : (
+        <>
+          <PriceItem>market_cap: {tickerData?.quotes.USD.market_cap}</PriceItem>
+          <PriceItem>ath_date: {tickerData?.quotes.USD.ath_date}</PriceItem>
+          <PriceItem>ath_price: {tickerData?.quotes.USD.ath_price}</PriceItem>
+          <PriceItem>market_cap: {tickerData?.quotes.USD.market_cap}</PriceItem>
+          <PriceItem>
+            market_cap_change_24h:{" "}
+            {tickerData?.quotes.USD.market_cap_change_24h}
+          </PriceItem>
+          <PriceItem>
+            percent_change_1h: {tickerData?.quotes.USD.percent_change_1h}
+          </PriceItem>
+          <PriceItem>
+            percent_change_1y: {tickerData?.quotes.USD.percent_change_1y}
+          </PriceItem>
+          <PriceItem>
+            percent_change_6h: {tickerData?.quotes.USD.percent_change_6h}
+          </PriceItem>
+          <PriceItem>
+            percent_change_7d: {tickerData?.quotes.USD.percent_change_7d}
+          </PriceItem>
+          <PriceItem>
+            percent_change_12h: {tickerData?.quotes.USD.percent_change_12h}
+          </PriceItem>
+          <PriceItem>
+            percent_change_15m: {tickerData?.quotes.USD.percent_change_15m}
+          </PriceItem>
+          <PriceItem>
+            percent_change_24h: {tickerData?.quotes.USD.percent_change_24h}
+          </PriceItem>
+          <PriceItem>
+            percent_change_30d: {tickerData?.quotes.USD.percent_change_30d}
+          </PriceItem>
+          <PriceItem>
+            percent_change_30m: {tickerData?.quotes.USD.percent_change_30m}
+          </PriceItem>
+          <PriceItem>
+            percent_from_price_ath:{" "}
+            {tickerData?.quotes.USD.percent_from_price_ath}
+          </PriceItem>
+          <PriceItem>price: {tickerData?.quotes.USD.price}</PriceItem>
+          <PriceItem>volume_24h: {tickerData?.quotes.USD.volume_24h}</PriceItem>
+          <PriceItem>
+            volume_24h_change_24h:{" "}
+            {tickerData?.quotes.USD.volume_24h_change_24h}
+          </PriceItem>
+        </>
+      )}
     </Container>
   );
 }

@@ -3,14 +3,16 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 const Container = styled.div`
   padding: 0px 30px;
   max-width: 480px;
   margin: 0 auto;
-  background-color: ${props => props.theme.bgColor};
+  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const Header = styled.header`
@@ -25,7 +27,7 @@ const CoinsList = styled.ul``;
 
 const Coin = styled.li`
   background-color: white;
-  color:${props => props.theme.textColor}};
+  color:${(props) => props.theme.textColor}};
   margin-bottom: 10px;
   border-radius: 20px;
   a {
@@ -36,14 +38,14 @@ const Coin = styled.li`
   }
   &:hover {
     a {
-      color:${props => props.theme.accentColor};
+      color:${(props) => props.theme.accentColor};
     }
   }
 `;
 
 const Title = styled.h1`
   font-size: 48px;
-  color: ${props =>props.theme.accentColor};
+  color: ${(props) => props.theme.accentColor};
 `;
 
 const Loader = styled.span`
@@ -58,20 +60,19 @@ const Img = styled.img`
 `;
 
 interface ICoin {
-  id: string,
-  name: string,
-  symbol: string,
-  rank: number,
-  is_new: boolean,
-  is_active: boolean,
-  type: string,
+  id: string;
+  name: string;
+  symbol: string;
+  rank: number;
+  is_new: boolean;
+  is_active: boolean;
+  type: string;
 }
 
-interface CoinsProps {
-
-}
-
-function Coins({}:CoinsProps) {
+function Coins() {
+  const isDark = useRecoilValue(isDarkAtom);
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
 
   return (
@@ -80,24 +81,28 @@ function Coins({}:CoinsProps) {
         <title>Coin</title>
       </Helmet>
       <Header>
-        <Title >Coin</Title>
-        {/* {isDark ? <DarkModeIcon color="primary" onClick={toggleDark} /> : <LightModeIcon color="primary" onClick={toggleDark} />} */}
+        <Title>Coin</Title>
+        {isDark ? (
+          <DarkModeIcon color="primary" onClick={toggleDarkAtom} />
+        ) : (
+          <LightModeIcon color="primary" onClick={toggleDarkAtom} />
+        )}
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>
       ) : (
         <CoinsList>
-          {data?.slice(0, 100).map(coin =>
+          {data?.slice(0, 100).map((coin) => (
             <Coin key={coin.id}>
-              <Link
-                to={`/${coin.id}`}
-                state={{'coin': coin.name}}
-              >
-                <Img src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`} alt={coin.id}/>
+              <Link to={`/${coin.id}`} state={{ coin: coin.name }}>
+                <Img
+                  src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
+                  alt={coin.id}
+                />
                 {coin.name} &rarr;
               </Link>
             </Coin>
-          )}
+          ))}
         </CoinsList>
       )}
     </Container>

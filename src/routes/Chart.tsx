@@ -9,8 +9,6 @@ interface ChartProps {
   coinID: string;
 }
 
-interface ChartDarkProps {}
-
 interface IData {
   time_open: number;
   time_close: number;
@@ -22,7 +20,7 @@ interface IData {
   market_cap: number;
 }
 
-function Chart({}: ChartDarkProps) {
+function Chart() {
   const isDark = useRecoilValue(isDarkAtom);
 
   const { coinID } = useOutletContext<ChartProps>();
