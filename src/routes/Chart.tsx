@@ -8,7 +8,6 @@ interface ChartProps {
 }
 
 interface ChartDarkProps {
-  isDark: boolean;
 }
 
 interface IData {
@@ -22,7 +21,7 @@ interface IData {
   market_cap: number;
 }
 
-function Chart({isDark}:ChartDarkProps) {
+function Chart({}:ChartDarkProps) {
   const { coinID } = useOutletContext<ChartProps>();
   const { isLoading, data } = useQuery<IData[]>(["ohlcv", coinID], () =>
     fetchCoinHistory(coinID)
@@ -49,7 +48,7 @@ function Chart({isDark}:ChartDarkProps) {
               },
             },
             theme: {
-              mode: isDark ? 'dark' : 'light',
+              mode: true ? 'dark' : 'light',
             },
             xaxis: {
               type: "datetime",
